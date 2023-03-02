@@ -1,0 +1,60 @@
+<!-- CREATE NEW CAMPGROUND -->
+
+<% layout('layout/boilerplate') %>
+	
+<div class="row">
+	<h1 class="text-center">New Campground</h1>
+	<div class="col-6 offset-3">
+		<form action="/campgrounds" method="POST" class="validated-form" novalidate>
+
+			<div class="mb-3">
+				<label for="title" class="form-label">Title</label>
+				<input type="text" id="title" class="form-control" name="campground[title]" required>
+				<div class="valid-feedback">
+					Looks good!
+				</div>
+			</div>
+
+			<div class="mb-3">
+				<label for="location" class="form-label">Location</label>
+				<input type="text" id="location" class="form-control" name="campground[location]" required>
+				<div class="valid-feedback">
+					Looks good!
+				</div>
+			</div>
+
+			<div class="mb-3">
+				<label for="image" class="form-label">Image Url</label>
+				<input type="text" id="image" class="form-control" name="campground[image]" required>
+				<div class="valid-feedback">
+					Looks good!
+				</div>
+			</div>
+
+			<div class="mb-3">
+				<label for="price" class="form-label">Campground Price</label>
+				<div class="input-group">
+					<span class="input-group-text">$</span>
+					<input type="text" id="price" class="form-control" name="campground[price]" aria-label="price" placeholder="0.00" required >
+					<div class="valid-feedback">
+						Looks good!
+					</div>
+				</div>
+			</div>
+
+			<div class="mb-3">
+				<label for="description" class="form-label">Description</label>
+				<textarea type="text" id="location" class="form-control" name="campground[description]" required></textarea>
+				<div class="valid-feedback">
+					Looks good!
+				</div>
+			</div>
+
+			<div class="mb-3">
+				<button class="btn btn-success">Add Campground</button>
+			</div>
+			
+		</form>
+		<a href="/campgrounds">All Campgrounds</a>
+	</div>
+</div>
