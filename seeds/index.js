@@ -52,11 +52,15 @@ const seedDB = async () => {
 
 		// seed data into campground
 		const camp = new Campground({
-			author: '640a277e65cb460783f5145e',
+			author: '6410d146e33334f8fef99f7e',
 			location: `${cities[random1000].city}, ${cities[random1000].state}`,
 			title: `${sample(descriptors)} ${sample(places)}`,
 			description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam distinctio in fuga ea sed laudantium minima laboriosam. Natus, quas, molestiae reiciendis maiores enim harum optio expedita iusto culpa fuga vitae.',
 			price: price,
+			geometry: {
+				type: 'Point',
+				coordinates: [-119.417931, 36.778259]
+			},
 			images: [
 				{
 					url: 'https://res.cloudinary.com/dtcwpvabh/image/upload/v1678639432/samples/landscapes/nature-mountains.jpg',
