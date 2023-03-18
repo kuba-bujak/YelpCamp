@@ -45,7 +45,7 @@ async function seedImg() {
 
 const seedDB = async () => {
 	await Campground.deleteMany({});
-	for (let i = 0; i < 10; i++) {
+	for (let i = 0; i < 200; i++) {
 		// setup
 		const random1000 = Math.floor(Math.random() * 1000);
 		const price = Math.floor(Math.random() * 20 + 10)
@@ -70,8 +70,8 @@ const seedDB = async () => {
 					filename: 'samples/landscapes/nature-mountains'
 				},
 				{
-					url: 'https://res.cloudinary.com/dtcwpvabh/image/upload/v1678639429/samples/landscapes/beach-boat.jpg',
-					filename: 'samples/landscapes/beach-boat'
+					url: 'https://res.cloudinary.com/dtcwpvabh/image/upload/v1678639423/samples/animals/reindeer.jpg',
+					filename: 'samples/animals/reindeer'
 				}
 			]
 		}); 
