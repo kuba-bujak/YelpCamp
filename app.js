@@ -16,6 +16,8 @@ const LocalStrategy = require('passport-local');
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
 
+const MongoStore = require('connect-mongo');
+
 const ExpressError = require('./utils/ExpressError');
 const User = require('./models/user');
 
@@ -25,9 +27,13 @@ const userRoutes = require('./routes/users');
 
 // ---------- Connection to the MongoDB ---------- // 
 
+// const dbUrl = process.env.DB_URL;
+const dbUrl = 'mongodb://127.0.0.1:27017/yelp-camp';
+
 mongoose.set('strictQuery', true);
 
-mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp',{
+
+mongoose.connect(dbUrl, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true
   });
@@ -53,7 +59,14 @@ app.use(mongoSanitize({
 	replaceWith: '_'
 }));
 
+const store = MongoStore.create({
+	mongoUrl: dbUrl,
+	secret: 'mysecret',
+	touchAfter: 24 * 60 * 60
+});
+
 const sessionConfig = {
+	store,
 	name: 'session',
 	secret: 'mysecret',
 	resave: false,
@@ -67,7 +80,7 @@ const sessionConfig = {
 }
 app.use(session(sessionConfig));
 app.use(flash());
-app.use(helmet());
+// app.use(helmet());
 
 const scriptSrcUrls = [
 	'https://stackpath.bootstrapcdn.com/',
