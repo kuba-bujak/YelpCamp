@@ -28,7 +28,7 @@ const userRoutes = require('./routes/users');
 // ---------- Connection to the MongoDB ---------- // 
 
 // const dbUrl = process.env.DB_URL;
-const dbUrl = 'mongodb://127.0.0.1:27017/yelp-camp';
+const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/yelp-camp';
 
 mongoose.set('strictQuery', true);
 
@@ -59,16 +59,18 @@ app.use(mongoSanitize({
 	replaceWith: '_'
 }));
 
+const secret = process.env.SECRET || 'mysecret';
+
 const store = MongoStore.create({
 	mongoUrl: dbUrl,
-	secret: 'mysecret',
+	secret,
 	touchAfter: 24 * 60 * 60
 });
 
 const sessionConfig = {
 	store,
 	name: 'session',
-	secret: 'mysecret',
+	secret,
 	resave: false,
 	saveUninitialized: true,
 	cookie: {
