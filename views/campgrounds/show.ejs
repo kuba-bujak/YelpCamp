@@ -15,7 +15,7 @@
 					<% campground.images.forEach((img, i) => { %>
 						<img src="" class="card-img-top" alt="...">
 				  		<div class="carousel-item <%= i === 0 ? 'active' : '' %>">
-							<img src="<%= img.url %>" class="d-block w-100" alt="">
+							<img src="<%= img.url %>" class="d-block w-100" alt="" crossorigin="anonymous">
 				  		</div>
 				  	<% }) %>
 				</div>
