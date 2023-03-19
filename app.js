@@ -13,6 +13,7 @@ const flash = require('connect-flash');
 const methodOverride = require('method-override');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
+const mongoSanitize = require('express-mongo-sanitize');
 
 const ExpressError = require('./utils/ExpressError');
 const User = require('./models/user');
@@ -47,6 +48,9 @@ app.set('views', path.join(__dirname, 'views')); // => set views folder
 app.use(express.urlencoded({ extended: true })) // => encode the url while creating new campground -> without it after app.post in res.send(req.body) nothing will be shown
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(mongoSanitize({
+	replaceWith: '_'
+}));
 
 const sessionConfig = {
 	secret: 'mysecret',
