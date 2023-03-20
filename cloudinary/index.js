@@ -1,3 +1,5 @@
+// ---------- Cloudinary Config ---------- //
+
 const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
@@ -8,10 +10,10 @@ cloudinary.config({
 });
 
 const storage = new CloudinaryStorage({
-    cloudinary,
+    cloudinary, // = cloudinary: cloudinary,
     params: {
-        folder: 'YelpCamp',
-        allowedFormats: ['jpeg', 'png', 'jpg']
+        folder: 'YelpCamp', // store location
+        allowedFormats: ['jpeg', 'png', 'jpg'] // formats
     }
 })
 

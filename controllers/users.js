@@ -1,4 +1,8 @@
+// ----------  Users Requirements  ---------- //  
+
 const User = require('../models/user');
+
+// ----------  Register Page  ---------- //  
 
 module.exports.renderRegister = (req, res) => {
     res.render('users/register'); 
@@ -20,6 +24,8 @@ module.exports.register = async(req, res, next) => {
     }
 }
 
+// ----------  Login Page  ---------- //  
+
 module.exports.renderLogin = (req, res) => {
     res.render('users/login');
 }
@@ -29,6 +35,8 @@ module.exports.login = (req, res) => {
     const redirectUrl = res.locals.returnTo || '/campgrounds';
     res.redirect(redirectUrl);
 }
+
+// ----------  Logout  ---------- //  
 
 module.exports.logout = (req, res, next) => {
     req.logout(function (err) {

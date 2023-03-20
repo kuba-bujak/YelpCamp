@@ -1,4 +1,8 @@
-// const campground = require("../../models/campground");
+// ---------- Set Requirements ---------- //
+
+const campground = require("../../models/campground");
+
+// ---------- Create map for every Campground ---------- //
 
 mapboxgl.accessToken = mapToken;
 const map = new mapboxgl.Map({

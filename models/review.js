@@ -1,5 +1,9 @@
+// ---------- Set Requirements ---------- //
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+
+// ---------- Review Schema ---------- //
 
 const reviewSchema = new Schema({
 	body: String,

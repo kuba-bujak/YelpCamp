@@ -1,3 +1,5 @@
+// ---------- Validate Forms ---------- //
+
 (() => {
    'use strict'
   

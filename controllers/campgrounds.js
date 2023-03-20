@@ -1,13 +1,19 @@
+// ---------- Campgrounds Requirements  ---------- //
+
 const Campground = require('../models/campground');
 const { cloudinary } = require('../cloudinary')
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const mapBoxToken = process.env.MAPBOX_TOKEN;
 const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
 
+// ----------  Index Page ---------- //  
+
 module.exports.index = async (req, res) => {
 	const campgrounds = await Campground.find({});
 	res.render('campgrounds/index', { campgrounds })
 }
+
+// ----------  New Campground Page ---------- //  
 
 module.exports.renderNewForm = (req, res) => {
 	res.render('campgrounds/new')
@@ -15,8 +21,8 @@ module.exports.renderNewForm = (req, res) => {
 
 module.exports.createCampground = async (req, res, next) => {
 		const geoData = await geocoder.forwardGeocode({ 
-			query: req.body.campground.location,
-			limit: 1
+			query: req.body.campground.location, // array with coordinates
+			limit: 1 // query returns a maximum of one result in the response
 		 }).send();
 		const campground = new Campground(req.body.campground);
 		campground.geometry = geoData.body.features[0].geometry;
@@ -26,6 +32,8 @@ module.exports.createCampground = async (req, res, next) => {
 		req.flash('success', 'Succesfully made a new campground!');
 		res.redirect(`/campgrounds/${ campground._id }`);
 }
+
+// ----------  Show Details Of Campground Page ---------- //  
 
 module.exports.showCampground = async (req, res) => {
 	const campground = await Campground.findById(req.params.id)
@@ -42,6 +50,8 @@ module.exports.showCampground = async (req, res) => {
 	}
 	res.render('campgrounds/show', { campground });
 }
+
+// ----------  Edit Campground Page ---------- //  
 
 module.exports.renderEditForm = async (req, res) => {
 	const { id } = req.params;
@@ -68,6 +78,8 @@ module.exports.updateCampground = async (req, res) => {
 	req.flash('success', 'Successfully updated campground!');
 	res.redirect(`/campgrounds/${ campground._id }`);
 }
+
+// ----------  Delete Campground ---------- //  
 
 module.exports.deleteCampground = async (req, res) => {
 	const { id } = req.params;

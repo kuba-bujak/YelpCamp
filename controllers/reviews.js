@@ -1,5 +1,9 @@
+// ----------  Reviews Requirements ---------- //  
+
 const Campground = require('../models/campground');
 const Review = require('../models/review');
+
+// ----------  Create Review  ---------- //  
 
 module.exports.createReview = async (req, res) => {
 	const campground = await Campground.findById(req.params.id);
@@ -11,6 +15,8 @@ module.exports.createReview = async (req, res) => {
 	req.flash('success', 'Created new review!');
 	res.redirect(`/campgrounds/${ campground._id }`);
 }
+
+// ----------  Delete Review  ---------- //  
 
 module.exports.deleteReview = async (req, res) => {
 	const { id, reviewId } = req.params;
